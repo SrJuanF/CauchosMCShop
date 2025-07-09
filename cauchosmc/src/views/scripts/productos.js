@@ -1,0 +1,68 @@
+//Los Productos Los sirve el back-end por los precios y los tiempos
+export default [
+    {id:1,
+    nombre: "Plástico",
+    type: "Polimeros",
+    time: 1,
+    precio: 5000,
+    descripcion: "El plástico es un material ampliamente utilizado en envases y productos diversos. Es importante " +
+    "reciclarlo para reducir su impacto ambiental.",
+    img: 'http://cauchosmc.com/wp-content/uploads/2019/04/MCMesa-de-trabajo-7-8.png',
+    items: 1
+    },
+    {id:2,
+    nombre: "Cauchos",
+    type: "Polimeros",
+    time: 1,
+    precio: 2000,
+    descripcion: "El Caucho",
+    img: 'http://cauchosmc.com/wp-content/uploads/2019/04/MCMesa-de-trabajo-7-8.png',
+    items: 1
+    },
+    {id:3,
+    nombre: "Cauchos Varios",
+    type: "Polimeros",
+    time: 1,
+    precio: 2000,
+    descripcion: "El Caucho Varios",
+    img: 'http://cauchosmc.com/wp-content/uploads/2019/04/MCMesa-de-trabajo-7-8.png',
+    items: 1
+    },
+    {id:4,
+    nombre: "Cauchos Varios",
+    type: "Polimeros",
+    time: 1,
+    precio: 2000,
+    descripcion: "El Caucho Varios",
+    img: 'http://cauchosmc.com/wp-content/uploads/2019/04/MCMesa-de-trabajo-7-8.png',
+    items: 1
+    },
+    {id:5,
+    nombre: "Cauchos Varios",
+    type: "Polimeros",
+    time: 1,
+    precio: 2000,
+    descripcion: "El Caucho Varios",
+    img: 'http://cauchosmc.com/wp-content/uploads/2019/04/MCMesa-de-trabajo-7-8.png',
+    items: 1
+    },
+    {id:6,
+    nombre: "Cauchos Varios",
+    type: "Polimeros",
+    time: 1,
+    precio: 2000,
+    descripcion: "El Caucho Varios",
+    img: 'http://cauchosmc.com/wp-content/uploads/2019/04/MCMesa-de-trabajo-7-8.png',
+    items: 1
+    },
+    {id:7,
+    nombre: "Cauchos Varios",
+    type: "Polimeros",
+    time: 1,
+    precio: 2000,
+    descripcion: "El Caucho Varios",
+    img: 'http://cauchosmc.com/wp-content/uploads/2019/04/MCMesa-de-trabajo-7-8.png',
+    items: 1
+    },
+
+];
