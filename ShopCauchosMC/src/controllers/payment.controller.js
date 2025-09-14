@@ -6,14 +6,19 @@ import { Order, UltimaDatePedid, pickDateProg } from '../services/respuestas-sol
 
 let timeOutIdOrders;
 let timeOutIdDates;
+let timeOutIdPickDates;
 function stopTimeOutOrders() {
-    clearTimeout(timeOutIdOrders);
+    clearInterval(timeOutIdOrders);
 }
 function stopTimeOutDates() {
-    clearTimeout(timeOutIdDates);
+    clearInterval(timeOutIdDates);
+}
+function stopTimeOutPickDates() {
+    clearInterval(timeOutIdPickDates);
 }
 
 export const createOrder = async (req, res) => {
+    //console.log('Origen recibido:', req.headers.origin);
     // ID SOLICITUD
     const ID_SOLICITUD = AsignarIDSolicitudes();
     // AGREGAR LA ID DE LA SOLICITUD
@@ -22,7 +27,7 @@ export const createOrder = async (req, res) => {
     await publisher("Orders", message);
     //ESPERANDO RESPUESTA
     var result = null;
-    timeOutIdOrders = setTimeout(() => {
+    timeOutIdOrders = setInterval(() => {
         result = Order(ID_SOLICITUD);
         if (result !== null) {
             res.send(result);
@@ -35,10 +40,14 @@ export const createOrder = async (req, res) => {
 export const receiveWebhook = async (req, res) => {
     
     const payment = req.query;
+    /*console.log('Headers:', req.headers);
+    console.log('Query:', req.query);*/
+    /*const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log('Solicitud desde IP:', ip);*/
     //console.log(payment);
+
     try {
         if (payment.type === "payment") {
-            
             
             const client = new MercadoPagoConfig({ accessToken: MERCADOPAGO_TOKEN });
             const capPay = new Payment(client);
@@ -73,7 +82,7 @@ export const Tiempo_Pedido = async (req, res) => {
      await publisher("UltimaFechaPedido", message);
      //ESPERANDO RESPUESTA
      var result = null;
-     timeOutIdDates = setTimeout(() => {
+     timeOutIdDates = setInterval(() => {
          result = UltimaDatePedid(ID_SOLICITUD);
          if (result !== null) {
             res.send(result);
@@ -92,11 +101,11 @@ export const Tiempo_Pick = async (req, res) => {
      await publisher("FechaFin", message);
      //ESPERANDO RESPUESTA
      var result = null;
-     timeOutIdDates = setTimeout(() => {
+     timeOutIdPickDates = setInterval(() => {
          result = pickDateProg(ID_SOLICITUD);
          if (result !== null) {
             res.send(result);
-            stopTimeOutDates();
+            stopTimeOutPickDates();
          }
      }, 1000);
 }

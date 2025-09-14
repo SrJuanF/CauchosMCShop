@@ -65,7 +65,7 @@ export const FechaUltPedido = async (req) => {
 
     req.forEach((producto) => {
 
-        TiempoTotal = TiempoTotal + (Productos[producto.id - 1].time * producto.quantity);
+        TiempoTotal += Productos[producto.id - 1].time * producto.quantity;
         ProductoXPedido.push({
             product_id: producto.id,
             product_Name: producto.title,
@@ -87,31 +87,31 @@ export const FechaUltPedido = async (req) => {
 
         const esLaboral = dia >= 1 && dia <= 5 && hora >= 7 && hora <= 17;
 
-        if(esLaboral){
-            // Calcula cuántos milisegundos quedan hoy dentro del horario laboral
-            const finJornada = new Date(FechaIni);
-            finJornada.setHours(17, 0, 0, 0);
-            const disponibleHoy = finJornada - FechaIni;
-            if (timeRestant <= disponibleHoy) {
-                FechaFin = new Date(FechaIni.getTime() + timeRestant);
-            }else{
-                timeRestant -= disponibleHoy;
-                // Avanza al próximo día laboral a las 7:00 a. m.
-                let fecha = new Date(FechaIni);
-                do {
-                    fecha.setDate(fecha.getDate() + 1);
-                } while (fecha.getDay() === 0 || fecha.getDay() === 6);
-                fecha.setHours(7, 0, 0, 0);
-                let {FechaIni: ini, FechaFin: fechafin} = jornada(fecha, timeRestant)
-                FechaFin = new Date(fechafin);
-            }
-        }else{
+        if(!esLaboral){
             // Mueve al próximo día laboral a las 7:00 a. m.
             do {
                 FechaIni.setDate(FechaIni.getDate() + 1);
             } while (FechaIni.getDay() === 0 || FechaIni.getDay() === 6);
             FechaIni.setHours(7, 0, 0, 0);
-            FechaFin = new Date(FechaIni);
+        }
+            
+        // Calcula cuántos milisegundos quedan hoy dentro del horario laboral
+        const finJornada = new Date(FechaIni);
+        finJornada.setHours(17, 0, 0, 0);
+        const disponibleHoy = finJornada - FechaIni;
+
+        if (timeRestant <= disponibleHoy) {
+            FechaFin = new Date(FechaIni.getTime() + timeRestant);
+        }else{
+            timeRestant -= disponibleHoy;
+            // Avanza al próximo día laboral a las 7:00 a. m.
+            let fecha = new Date(FechaIni);
+            do {
+                fecha.setDate(fecha.getDate() + 1);
+            } while (fecha.getDay() === 0 || fecha.getDay() === 6);
+            fecha.setHours(7, 0, 0, 0);
+            let {FechaIni: ini, FechaFin: fechafin} = jornada(fecha, timeRestant)
+            FechaFin = fechafin;
         }
 
         return {FechaIni, FechaFin}
@@ -134,7 +134,6 @@ export const FechaUltPedido = async (req) => {
 
 export const pickFecha = async (req) => {
     let fecha = "";
-
     if(req.type === "success"){
         fecha = await findPedido(req.payment_id);
     }else if(req.type === "pending"){

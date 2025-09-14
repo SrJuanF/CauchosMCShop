@@ -34,7 +34,7 @@ class RabbitMQ{
             try {
                 this.channel.consume("Orders", async (message) => {       
                     const content = JSON.parse(message.content.toString());          
-                    const preference = await crearOrder(content.contenidoRX);         
+                    const preference = await crearOrder(content.contenidoRX);    
                     this.resultadosOrders.push({ contenido: preference, id_solicitud: content.id_solicitud });
                     console.log('Message Received');          
                     this.channel.ack(message)

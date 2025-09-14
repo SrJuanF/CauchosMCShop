@@ -13,6 +13,7 @@ export function Order(id_solicitud) {
             break;
         }
     }
+    //console.log("Resultado Order: ", res);
     return res;
     
 }

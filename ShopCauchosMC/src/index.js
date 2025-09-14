@@ -7,8 +7,8 @@ import './database/database.js'
 import RabbitMQ from './colas/conexionRabbit.js'
 
 
-var corsOptions = {
-    origin: ['https://shopcauchosmc.com', 'http://localhost:8080'], // Reemplazar con dominio
+var corsOptions = {//origin: '*',
+    origin: ['https://shopcauchosmc.com', 'https://dev.shopcauchosmc.com', 'http://localhost:8080'], // Reemplazar con dominio
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
@@ -24,17 +24,3 @@ app.listen(PORT);
 console.log('Server on port', PORT)
 
 RabbitMQ.connect();
-//ShopCauchosMC%*07
-//docker-compose logs -f backend
-
-//dir
-//docker-compose build frontend
-//docker-compose up -d
-
-/*
-import { encrypt, compare } from "./services/handleBcrypt.js";
-let hs = await encrypt("ShopCauchosMC%*07")
-console.log(hs)
-
-let kd = await compare("ShopCauchosMC%*07", hs)
-console.log(kd)*/

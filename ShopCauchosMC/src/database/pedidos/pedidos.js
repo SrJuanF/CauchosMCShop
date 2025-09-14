@@ -203,7 +203,7 @@ export const PedidosXHacer = async () => {
 export const findPedido = async (id_Payment) => {
     try {
         const pedidoE = await Pedido.findOne({ id_Payment});
-        return pedidoE.Date_Fin_Prodcc;
+        return pedidoE?.Date_Fin_Prodcc;
     }
     catch (error) {
         console.log(error);

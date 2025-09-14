@@ -3,9 +3,12 @@
     <body class="body">
         <header class="header">
             <div class="header1">
-                <div id="contacto" @click="toggleContact()"><img src="../../assets/CONTACTOS.png" class="ContactoIMG"></div>
-                <a href="/" style="width: 15vh; height: 12vh; display: flex; justify-content: center; align-items: center;"><img src="../../assets/LOGO.png" class="LogoIMG"
-                        :style="{ width: changeIMG.width, height: changeIMG.height }"></a>
+                <div id="contacto" @click="toggleContact()"><img src="../../assets/CONTACTOS.png" class="ContactoIMG"
+                        loading="lazy" alt="Contacto"></div>
+                <a href="/"
+                    style="width: 15vh; height: 12vh; display: flex; justify-content: center; align-items: center;"><img
+                        src="../../assets/LOGO.png" class="LogoIMG"
+                        :style="{ width: changeIMG.width, height: changeIMG.height }" alt="CauchosMC Logo"></a>
                 <div class="container-icon">
                     <div class="container-cart-icon" @click="seePaneles.seeCar = !seePaneles.seeCar">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -21,19 +24,26 @@
                         <div class="row-product">
                             <div class="cart-product" v-for="product in carrito.items" :key="product.id">
                                 <div class="info-cart-product">
-                                    <span class="cantidad-producto-carrito"><b>{{product.quantity}}</b></span>
-                                    <p class="titulo-producto-carrito">{{product.title}}</p>
-                                    <span class="precio-producto-carrito">${{product.unit_price.toLocaleString('es-ES',{useGrouping: true})}}</span>
+                                    <span class="cantidad-producto-carrito"><b>{{ product.quantity }}</b></span>
+                                    <p class="titulo-producto-carrito">{{ product.title }}</p>
+                                    <span class="precio-producto-carrito">${{ product.unit_price.toLocaleString('es-ES',
+                                        {
+                                            useGrouping:
+                                        true})}}</span>
                                 </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                    stroke="currentColor" class="icon-close" @click="remProduct(product.id)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="icon-close"
+                                    @click="remProduct(product.id)">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </div>
                         </div>
                         <div class="cart-total">
                             <h3>Total:</h3>
-                            <span class="total-pagar">${{carrito.total.toLocaleString('es-ES',{useGrouping: true})}}</span>
+                            <span class="total-pagar">${{ carrito.total.toLocaleString('es-ES', {
+                                useGrouping:
+                                    true
+                            }) }}</span>
                             <button class="btnPagoCar" @click="seeTimePDFun()">Pagar</button>
                         </div>
                     </div>
@@ -45,51 +55,64 @@
 
         <div id="recycling-image"></div>
         <div class="preset">
-            <div style="text-align: center;color: black;font-size: 5vh; padding: 4.87vh 0px;">
+            <div style="text-align: center;color: black;font-size: 5vh; padding: 4.87vh 1vw;">
                 <b>¡Tienda Cauchos MC!</b>
             </div>
 
             <input list="browsers" name="browser" id="searchInput" v-model="searchItem"
-                placeholder="Busca tu producto aquí...">
+                placeholder="Busca por nombre de producto, tipo o categoria...">
             <datalist id="browsers">
                 <option value="Ordeños"></option>
+                <option value="Plasticos"></option>
             </datalist>
 
             <div class="container">
-                <div class="box" v-for="product in productsFiltred" :key="product.id">
+                <div class="box" v-for="product in visibleProducts" :key="product.id">
                     <div class="tlProd">{{ product.nombre }}</div>
                     <div style="display: flex; flex-direction: column; align-items: center;">
-                        <img :src="product.img">
+                        <img :src="product.img" loading="lazy" :alt="product.nombre">
                         <div style="display: flex; align-items: center;">
-                            <div class="PrecProd">${{product.precio.toLocaleString('es-ES',{useGrouping: true})}}</div>
+                            <div class="PrecProd">${{ product.precio.toLocaleString('es-ES', { useGrouping: true }) }}
+                            </div>
                             <input type="number" min="1" max="100000" step="1" value="1" v-model="product.items">
                         </div>
                         <div class="descrip">{{ product.descripcion }}</div>
                     </div>
                     <button class="btnAñadir" @click="addProduct(product)">Añadir</button>
                 </div>
+
+                <!-- Botón para cargar más productos -->
+                <div v-if="visibleProducts.length < productsFiltred.length" class="load-more-container">
+                    <button class="btnLoadMore" @click="loadMoreProducts()">
+                        Cargar más productos ({{ productsFiltred.length - visibleProducts.length }} restantes)
+                    </button>
+                </div>
             </div>
 
         </div>
 
-        
+
 
 
         <div id="footer">
             <div style="display: flex; align-items: center;">
                 <div class="footerIMG"></div>
-                <div style="color: white; display: flex; flex-direction: column; justify-content: center;padding: 0px 0.4vw">
+                <div
+                    style="color: white; display: flex; flex-direction: column; justify-content: center;padding: 0px 0.4vw">
                     <p class="infoM">Nit 21659660-7</p>
                     <p class="infoM">Medellín Calle 7 Sur # 51 - 45</p>
                 </div>
-                <div style="color: white; display: flex; flex-direction: column; justify-content: center;padding: 0px 0.4vw">
+                <div
+                    style="color: white; display: flex; flex-direction: column; justify-content: center;padding: 0px 0.4vw">
                     <p class="infoM">CauchosMC@gmail.com</p>
                     <p class="infoM">(+57) 312 802 3879</p>
                 </div>
-                <div style="display: flex; align-items: end; height: 5.3vh"><a class="TDat" @click="togglePTTData()">Política de Tratamiento de Datos</a></div>
+                <div style="display: flex; align-items: end; height: 5.3vh"><a class="TDat"
+                        @click="togglePTTData()">Política de Tratamiento de Datos</a></div>
             </div>
 
-            <a href="https://www.instagram.com/cauchosmc/?hl=es-la"><img class="instagram" src="../../assets/instagram.png"></a>
+            <a href="https://www.instagram.com/cauchosmc/?hl=es-la"><img class="instagram"
+                    src="../../assets/instagram.png" loading="lazy" alt="Instagram"></a>
         </div>
 
         <div v-if="seePaneles.seeFondo" class="Degrad">
@@ -98,7 +121,7 @@
                     <div class="time-pedido-header-button" @click="closePanelsIn()">✖️</div>
                 </div>
                 <div class="time-pedido-content">
-                    <p class="time-pedido-messgue">Su Pedido Será Producido Aproximadamente El {{LastDate}}</p>
+                    <p class="time-pedido-messgue">Su Pedido Será Producido Aproximadamente El {{ LastDate }}</p>
                     <button class="time-pedido-btn" @click="FormularioPago()">Continuar</button>
                 </div>
             </div>
@@ -134,7 +157,8 @@
                         <input type="text" id="ciudad" name="ciudad" v-model="InfoPedido.city">
                     </div>
                     <div class="formIPTTD">
-                        <input type="checkbox" id="TTData" name="TTData" v-model="InfoPedido.ATTdata" style="margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif;">
+                        <input type="checkbox" id="TTData" name="TTData" v-model="InfoPedido.ATTdata"
+                            style="margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif;">
                         <label>Acepto la política de tratamiento de datos</label>
                     </div>
                     <div class="mitInfo"><button class="btnOKPay" @click="validarFormulario()">Continuar</button></div>
@@ -161,13 +185,16 @@
                     </div>
                     <div class="formIP">
                         <label for="mensaje">Mensaje</label>
-                        <textarea id="mensaje" name="mensaje" rows="3" placeholder="Escribe aquí..." v-model="InfoContact.message"></textarea>
+                        <textarea id="mensaje" name="mensaje" rows="3" placeholder="Escribe aquí..."
+                            v-model="InfoContact.message"></textarea>
                     </div>
                     <div class="formIPTTD">
-                        <input type="checkbox" id="TTData" name="TTData" v-model="InfoContact.ATTdata" style="margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif;">
+                        <input type="checkbox" id="TTData" name="TTData" v-model="InfoContact.ATTdata"
+                            style="margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif;">
                         <label>Acepto la política de tratamiento de datos</label>
                     </div>
-                    <div class="mitInfo"><button class="btnOKPay" @click="validarFormularioContacto()">Enviar</button></div>
+                    <div class="mitInfo"><button class="btnOKPay" @click="validarFormularioContacto()">Enviar</button>
+                    </div>
                 </div>
             </div>
 
