@@ -3,13 +3,15 @@ dotenv.config();
 
 export const PORT = process.env.PORT;
 
-export const HOST = `http://localhost:${PORT}`;
+export const HOST = process.env.HOST;
 
 export const URI = process.env.MONGODB_URI;
 
 export const MQURI = process.env.RABBITMQ_URI;
 
 export const MERCADOPAGO_TOKEN = process.env.MERCADOPAGO_KEY;
+
+export const MERCADOPAGO_TOKEN_TEST = process.env.MERCADOPAGO_KEY_TEST;
 
 export const SECRET_KEY = process.env.TOKEN_KEY;
 

@@ -1,5 +1,5 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
-import { HOST, MERCADOPAGO_TOKEN } from '../config.js';
+import { HOST, MERCADOPAGO_TOKEN, MERCADOPAGO_TOKEN_TEST } from '../config.js';
 
 
 
@@ -13,9 +13,9 @@ export const crearOrder = async (req) => {
         body: {
             items: req.productos,
             back_urls: {
-                success: "https://dev.shopcauchosmc.com/success",//`${HOST}/success`,
-                failure: "https://dev.shopcauchosmc.com/failure",//`${HOST}/failure`,
-                pending: "https://dev.shopcauchosmc.com/pending",//`${HOST}/pending`,
+                success: `${HOST}/success`,//`${HOST}/success`,
+                failure: `${HOST}/failure`,//`${HOST}/failure`,
+                pending: `${HOST}/pending`,//`${HOST}/pending`,
             },
             auto_return: 'approved',
             payer:{
@@ -25,7 +25,7 @@ export const crearOrder = async (req) => {
                 identification: {number: req.nit},
                 name: req.persona
             },
-            notification_url: "https://dev.shopcauchosmc.com/api/webhook",
+            notification_url: `${HOST}/api/webhook`,
 
         }
       })
