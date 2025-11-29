@@ -24,7 +24,7 @@ app.listen(PORT);
 console.log('Server on port', PORT)
 
 RabbitMQ.connect();
-//ShopCauchosMC%*07
+
 //docker-compose logs -f backend
 
 //dir
@@ -40,7 +40,7 @@ rm -rf ShopCauchosMC/.git && \
 git rm --cached -rf ShopCauchosMC && \
 git add cauchosmc && \
 git add ShopCauchosMC 
-git commit -m "2"
+git commit -m "2025"
 git push -u origin main
 
 git remote set-url origin https://github.com/usuario/repositorio2.git
