@@ -83,15 +83,6 @@ export default [
         items: 1
     },
     {id:10,
-        nombre: "Cauchos Varios",
-        type: "Ordeños - Caucho",
-        time: 1,
-        precio: 2000,
-        descripcion: "El Caucho Varios",
-        img: 'http://cauchosmc.com/wp-content/uploads/2019/09/FOTOS-CM-34.jpg',
-        items: 1
-    },
-    {id:11,
         nombre: "Tapon Artificial Pezonera",
         type: "Ordeños - Caucho",
         time: 1,
@@ -100,31 +91,13 @@ export default [
         img: 'http://cauchosmc.com/wp-content/uploads/2019/09/FOTOS-CM-35.jpg',
         items: 1
     },
-    {id:12,
-        nombre: "Cauchos Varios",
-        type: "Ordeños - Caucho",
-        time: 1,
-        precio: 2000,
-        descripcion: "El Caucho Varios",
-        img: 'http://cauchosmc.com/wp-content/uploads/2019/09/FOTOS-CM-36.jpg',
-        items: 1
-    },
-    {id:13,
+    {id:11,
         nombre: "Diafragma",
         type: "Ordeños - Caucho",
         time: 1,
         precio: 2000,
         descripcion: "El Caucho Varios",
         img: 'http://cauchosmc.com/wp-content/uploads/2019/09/FOTOS-CM-37.jpg',
-        items: 1
-    },
-    {id:14,
-        nombre: "Cauchos Varios",
-        type: "Ordeños - Caucho",
-        time: 1,
-        precio: 2000,
-        descripcion: "El Caucho Varios",
-        img: 'http://cauchosmc.com/wp-content/uploads/2019/09/FOTOS-CM-38.jpg',
         items: 1
     },
 

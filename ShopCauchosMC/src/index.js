@@ -40,7 +40,7 @@ rm -rf ShopCauchosMC/.git && \
 git rm --cached -rf ShopCauchosMC && \
 git add cauchosmc && \
 git add ShopCauchosMC 
-git commit -m "deploy physical rentals"
+git commit -m "2"
 git push -u origin main
 
 git remote set-url origin https://github.com/usuario/repositorio2.git
