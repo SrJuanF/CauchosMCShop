@@ -7,5 +7,5 @@
 ./wait-for-it.sh rabbitmq 5672
 
 # Iniciar el backend
-npm run dev
+yarn dev
 

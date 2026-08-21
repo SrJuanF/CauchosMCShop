@@ -1,5 +1,5 @@
 version: "3.8"
-
+#docker compose up -d --build servicio1 servicio2
 services:
   frontend:
     build: ./cauchosmc
