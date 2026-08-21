@@ -5,6 +5,7 @@ import { get_Pedidos, update_Pedido, delete_Pedido } from '../controllers/pedido
 import { get_PaymentsReady, get_PaymentsPending, update_PaymentReady, update_PaymentPending, delete_PaymentReady, delete_PaymentPending } 
 from '../controllers/payment.controller.js'
 import {get_Costos, post_Costo, update_Costo, delete_Costo} from '../controllers/costos.controller.js'
+import { contactMessage } from '../controllers/contact.controller.js'
 
 //import path from 'path'
 
@@ -40,6 +41,8 @@ router.delete('/api/costosDX', verifyToken, delete_Costo);
 
 
 router.post('/api/webhook', receiveWebhook);
+
+router.post('/api/contacto', contactMessage);
 
 
 /*

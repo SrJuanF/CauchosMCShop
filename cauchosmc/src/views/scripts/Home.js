@@ -244,8 +244,8 @@ export default {
         alert("Debes aceptar nuestra política de tratamiento de datos.");
         return false;
       }
-      //await MessaggeOut();
-      //window.location.href = `${this.apiURL}/contacto`;
+      await MessaggeOut();
+      window.location.href = `${this.apiURL}/contacto`;
       return true;
     },
     //functions
