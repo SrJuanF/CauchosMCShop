@@ -24,7 +24,7 @@ app.listen(PORT);
 console.log('Server on port', PORT)
 
 RabbitMQ.connect();
-
+//ShopCauchosMC%*07
 //docker-compose logs -f backend
 
 //dir
